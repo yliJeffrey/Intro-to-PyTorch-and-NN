@@ -76,7 +76,6 @@ optimizer = torch.optim.SGD(model.parameters(), lr=1e-3)    # optimizer
 def train(dataloader, model, loss_fn, optimizer):
     size = len(dataloader.dataset)
     model.train()
-    print(len(dataloader))
     for batch, (X, y) in enumerate(dataloader):
         X, y = X.to(device), y.to(device)   # moving data to the device
 
@@ -110,7 +109,7 @@ def test(dataloader, model, loss_fn):
 
 
 # train the model
-epochs = 5
+epochs = 10
 for t in range(epochs):
     print(f"Epoch {t+1}\n------------------------")
     train(train_dataloader, model, loss_fn, optimizer)
@@ -124,4 +123,4 @@ print("Saved PyTorch Model State to mnist_model.pth")
 
 # load model
 model = NeuralNetwork().to(device)
-model.load_state_dict(torch.load("model.pth"))
+model.load_state_dict(torch.load("mnist_model.pth"))
